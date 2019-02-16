@@ -1,0 +1,19 @@
+{
+  "name": "budget_vision",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjcarrington/budget_vision.git"
+  },
+  "author": "Seth T and Billy C",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/bjcarrington/budget_vision/issues"
+  },
+  "homepage": "https://github.com/bjcarrington/budget_vision#readme"
+}
