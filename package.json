@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/bjcarrington/budget_vision/issues"
   },
-  "homepage": "https://github.com/bjcarrington/budget_vision#readme"
+  "homepage": "https://github.com/bjcarrington/budget_vision#readme",
+  "dependencies": {
+    "@google-cloud/vision": "^0.24.0",
+    "express": "^4.16.4",
+    "multer": "^1.4.1"
+  }
 }

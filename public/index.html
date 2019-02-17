@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Budget Vision</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        input#image {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        input#image + label {
+            font-size: 1.25em;
+            font-weight: 700;
+            font-family: sans-serif;
+            color: white;
+            background-color: Crimson;
+            width: calc(100% - 2em);
+            height: 50vh;
+            padding: 1em;
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+        }
+        /*input#image + label:after{
+            /*content: url(camera.svg);
+            content: attr(data-content);
+        }*/
+        input#image + label > img {
+            width: 100%;
+            padding-top: 1em;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            const input = document.querySelector('input');
+            input.addEventListener('change', () => {
+                //let image = document.createElement('img');
+                //image.src = window.URL.createObjectURL(input.files[0]);
+                //document.querySelector('label').appendChild(image);
+                //document.querySelector('label').setAttribute('data-content', input.files[0]);
+                document.querySelector('img').src = window.URL.createObjectURL(input.files[0]);
+                document.querySelector('form').submit();
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <h1>Budget Vision</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" accept="image/png, image/jpeg" id="image" name="image" />
+        <label for="image">Take a pic!<img src="camera.svg" /></label>
+        <!--input type="submit"-->
+    </form>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            function saveText(saved){
+                localStorage.budget = JSON.stringify(saved);  
+            }
+
+            function Budget(name, max){
+                this.name = name;
+                this.maxSpending = parseFloat(parseFloat(max).toFixed(2));
+                this.inCart = 0.0;
+                this.overBudget = false;
+            }
+
+            Budget.prototype = {
+                addToCart: function(amount){
+                    var price = parseFloat(parseFloat(amount).toFixed(2));
+                    if ( typeof price === "number" && !isNaN(price) ) {       
+                        this.inCart += price;
+                        this.updateOverBudget();
+                    }
+                },
+                
+                updateOverBudget(){
+                    if (this.maxSpending - this.inCart < 0.0){
+                        overBudget = true;
+                    }
+                }
+
+            };
+            var budgetList = (localStorage.budget)? JSON.parse(localStorage.budget): [];
+            if ( !Array.isArray(budgetList) || budgetList.length == 0){ 
+                budgetList = [];
+                var generalBudget = new Budget("general", 20.00);
+                budgetList.push(generalBudget);
+            }
+
+            budgetList[0].addToCart(window.location.search.substr("?amt=".length));
+            saveText(budgetList);
+        </script>
+    </head>
+    <body>
+        <h1>This is the submit page</h1>
+        <h2>No amt given</h2>
+        <script>
+            document.querySelector('h2').innerText = window.location.search.substr("?amt=".length)
+        </script>
+    </body>
+</html>
