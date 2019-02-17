@@ -20,6 +20,7 @@ app.post('*', upload.single('image'), async (req, res) => {
     //const [result] = await client.documentTextDetection(req.file.buffer)
     const r = result.textAnnotations
     console.log(r)
+    console.log(req.body.allowance)
     //res.send(`<h1>${r.length && r[0].description}</h1>`)
     //res.status(201);
     //res.sendFile('public/submit.html', { root: __dirname })
@@ -32,11 +33,11 @@ app.post('*', upload.single('image'), async (req, res) => {
         if (noLetters.length && noLetters[0]) {
             let text = noLetters[0].description;
             let textNumber = text.match(/[\d.]+/) && text.match(/[\d.]+/)[0]
-            res.redirect('submit.html?amt='+(textNumber || text))
+            res.redirect('submit.html?amt='+(textNumber || text)+"&allowance="+req.body.allowance)
         } else {
             let text = r[0].description;
             let textNumber = text.match(/[\d.]+/) && text.match(/[\d.]+/)[0]
-            res.redirect('submit.html?amt='+(textNumber || text));
+            res.redirect('submit.html?amt='+(textNumber || text)+"&allowance="+req.body.allowance);
         }
     }
 })

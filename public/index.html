@@ -37,6 +37,13 @@
             width: 100%;
             padding-top: 1em;
         }
+        /*<form action="" method="get" class="form-example">
+            <div class="form-example">
+                <label for="allowance">Budget for spending</label>
+                <input type="number" name="allowance">
+                <input type="submit" value = "Submit">
+            </div>
+        </form>*/
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
@@ -56,8 +63,10 @@
     <h1>Budget Vision</h1>
     <form method="post" enctype="multipart/form-data">
         <input type="file" accept="image/png, image/jpeg" id="image" name="image" />
-        <label for="image">Take a pic!<img src="camera.svg" /></label>
+        <label for="image">Take a pic!<img src="camera.png" /></label>
         <!--input type="submit"-->
+        <label for="allowance">Budget for spending</label>
+        <input type="number" name="allowance">
     </form>
   </body>
 </html>

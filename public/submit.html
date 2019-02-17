@@ -51,17 +51,32 @@
                 var generalBudget = new Budget("general", 20.00);
                 budgetList.push(generalBudget);
             }
+console.log(window.location.search.substring(window.location.search.indexOf("&allowance=")+"&allowance=".length));
 
+            if(parseFloat(window.location.search.substring((window.location.search.indexOf("&allowance=")+"&allowance=".length)))>0){
+
+                budgetList[0].maxSpending = parseFloat(parseFloat((window.location.search.substring(window.location.search.indexOf("&allowance=")+"&allowance=".length))).toFixed(2));
+            }
             addToCart(budgetList[0],window.location.search.substr("?amt=".length));
             saveText(budgetList);
         </script>
     </head>
     <body>
-        <h1>This is the submit page</h1>
-        <h2>No amt given</h2>
+        <h1>Thank you for submitting!</h1>
+        <h2 id="amt">Amount: <span>None</span></h2>
+        <h2 id="allowance">Allowance: <span>No update</span></h2>
+        <input type="button" value="Done shopping" />
         <script>
-            document.querySelector('h2').innerText = window.location.search.substr("?amt=".length)
+            document.querySelector('h2#amt span').innerText = "$"+window.location.search.substring("?amt=".length, window.location.search.indexOf("&allowance="))
+            document.querySelector('h2#allowance span').innerText = "$"+window.location.search.substring(window.location.search.indexOf("&allowance=")+"&allowance=".length)
             document.querySelector('h1').innerText = 'Current budget: $' + budgetList[0].maxSpending + ' amount in cart: $' + budgetList[0].inCart
+            document.querySelector('input[type="button"]').addEventListener('click', () => {
+                //clearCart()
+                budgetList[0].inCart = 0.0;
+                document.querySelector('h2#allowance span').innerText = "$"+window.location.search.substring(window.location.search.indexOf("&allowance=")+"&allowance=".length)
+                document.querySelector('h1').innerText = 'Current budget: $' + budgetList[0].maxSpending + ' amount in cart: $' + budgetList[0].inCart
+                saveText(budgetList);
+            })
         </script>
     </body>
 </html>
