@@ -30,7 +30,9 @@ app.post('*', upload.single('image'), async (req, res) => {
     } else {
         let noLetters = r.filter(m => !m.description.match(/[A-Za-z]/))
         if (noLetters.length && noLetters[0]) {
-            res.redirect('submit.html?amt='+noLetters[0].description.match(/[\d.]+/)[0])
+            let text = noLetters[0].description;
+            let textNumber = text.match(/[\d.]+/) && text.match(/[\d.]+/)[0]
+            res.redirect('submit.html?amt='+(textNumber || text))
         } else {
             let text = r[0].description;
             let textNumber = text.match(/[\d.]+/) && text.match(/[\d.]+/)[0]

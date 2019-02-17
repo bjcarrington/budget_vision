@@ -13,7 +13,7 @@
                 this.overBudget = false;
             }
 
-            Budget.prototype = {
+            /*Budget.prototype = {
                 addToCart: function(amount){
                     var price = parseFloat(parseFloat(amount).toFixed(2));
                     if ( typeof price === "number" && !isNaN(price) ) {       
@@ -28,7 +28,23 @@
                     }
                 }
 
-            };
+            };*/
+
+            function addToCart(bud, amount){
+                var price = parseFloat(parseFloat(amount).toFixed(2));
+                if ( typeof price === "number" && !isNaN(price) ) {       
+                    bud.inCart += price;
+                    updateOverBudget(bud);
+                }
+
+            }
+
+            function updateOverBudget(bud){
+                if (bud.maxSpending - bud.inCart < 0.0){
+                    bud.overBudget = true;
+                }
+            }
+
             var budgetList = (localStorage.budget)? JSON.parse(localStorage.budget): [];
             if ( !Array.isArray(budgetList) || budgetList.length == 0){ 
                 budgetList = [];
@@ -36,7 +52,7 @@
                 budgetList.push(generalBudget);
             }
 
-            budgetList[0].addToCart(window.location.search.substr("?amt=".length));
+            addToCart(budgetList[0],window.location.search.substr("?amt=".length));
             saveText(budgetList);
         </script>
     </head>
@@ -45,6 +61,7 @@
         <h2>No amt given</h2>
         <script>
             document.querySelector('h2').innerText = window.location.search.substr("?amt=".length)
+            document.querySelector('h1').innerText = 'Current budget: $' + budgetList[0].maxSpending + ' amount in cart: $' + budgetList[0].inCart
         </script>
     </body>
 </html>
